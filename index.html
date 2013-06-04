@@ -3,29 +3,59 @@
 
 <div class='header'><h1>v1</h1></div>
 
-<script src="lib/jquery-1.8.2.min.js"></script>
-<script src="phonegap.js"></script>
+<script src="lib/jquery-1.8.2.js"></script>
 
 <div id="jsonData"></div>
 <script>
+function jsonp_callback(data, status){
+	//data loaded
+	// alert( "data loaded" ) ;
+	// alert(data[0]) ;
+	// $("#jsonData").html(JSON.stringify(data[0])) ;
+	alert( data ) ;
+}
+
+$.myCB = function(data, status){
+	alert( "myCb" ) ;
+}
+
+	// url: 'http://172.23.33.46:8000/ping?callback=',
+	// url: 'data.json',
 $.ajax({
-	url: '172.23.33.46:8000/ping',
+	// url: 'https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=mralexgray&count=1',
+	// url: 'data.json',
+	url: 'http://172.23.33.46:8000/ping/',
 	dataType: 'jsonp',
+	crossDomain: true,
+	jsonpCallback: 'myCB',
+	// jsonp: false,
+	// jsonpCallback: 'jsonp_callback',
 	timeout: 1500,
 	success: function(data, status){
 		//data loaded
 		// alert( "data loaded" ) ;
 		// alert(data[0]) ;
-		$("#jsonData").html(JSON.stringify(data[0])) ;
+		// $("#jsonData").html(JSON.stringify(data[0])) ;
+		alert( data ) ;
 	},
-	error: function( a , b ){
+	error: function( a , b , c ){
 		//error loading data
 		alert("data error" ) ;
-		alert( a[0] ) ;
-		alert( a[1] ) ;
-		alert( b ) ;
+		// alert( a[0] ) ;
+		// alert( a[1] ) ;
+		// alert( b ) ;
 	}
 });
+/*
+console.log( 'ready' ) ;
+$.getJSON(
+	'data.json?callback=?' ,
+	function( data ) {
+	alert( data ) ;
+	} )
+	.always( console.log( 'xxx' ) ) ;
+*/
+
 </script>
 
 </body>
