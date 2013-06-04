@@ -18,7 +18,8 @@ $.ajax({
 	error: function( a , b ){
 		//error loading data
 		alert("data error" ) ;
-		alert( a ) ;
+		alert( a[0] ) ;
+		alert( a[1] ) ;
 		alert( b ) ;
 	}
 });
